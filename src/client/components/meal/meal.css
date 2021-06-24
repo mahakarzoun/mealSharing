@@ -1,0 +1,14 @@
+.meal {
+    display: inline;
+    width:30%;
+    text-align:center;
+
+}
+
+h2 {
+    margin:0px;
+    text-transform: capitalize;
+}
+img{
+    width:100%;
+}

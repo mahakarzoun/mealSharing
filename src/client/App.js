@@ -1,20 +1,15 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import TestComponent from "./components/TestComponent/TestComponent";
+import HomePage from "./components/home-page/homePage";
+import Header from "./components/header/header";
+import Footer from "./components/footer/footer";
 
 function App() {
   return (
-    <Router>
-      <Route exact path="/">
-        <p>test</p>
-      </Route>
-      <Route exact path="/lol">
-        <p>lol</p>
-      </Route>
-      <Route exact path="/test-component">
-        <TestComponent></TestComponent>
-      </Route>
-    </Router>
+    <div>
+      <Header></Header>
+      <HomePage />
+      <Footer></Footer>
+    </div>
   );
 }
 
