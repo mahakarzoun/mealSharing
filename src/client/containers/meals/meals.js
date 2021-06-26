@@ -3,14 +3,12 @@ import Meal from "../../components/meal/meal";
 import "./meals.css";
 
 function Meals() {
-  const SERVER_URL = "http://loaclhost";
+  const SERVER_URL = "http://localhost";
   const SERVER_PORT = 5000;
   const ENDPOINT = {
-    meals: "meals",
+    meals: "api/meals",
   };
-  const [meals, setMeals] = useState([
-    { id: 1, title: "pasta", img: "https://i.imgur.com/8htalH1.jpg" },
-  ]);
+  const [meals, setMeals] = useState([]);
   const [searchParam, setParam] = useState("");
   useEffect(() => {
     fetch(`${SERVER_URL}:${SERVER_PORT}/${ENDPOINT.meals}`).then((res) =>

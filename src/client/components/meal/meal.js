@@ -4,9 +4,10 @@ import { Link } from "react-router-dom";
 function Meal({ data }) {
   return (
     <div className="meal">
-      <img src={data.img} />
       <Link to={`/meals/${data.id}`}>
+        <img src={data.image} />
         <h2>{data.title}</h2>
+        <h3>{data.description}</h3>
       </Link>
     </div>
   );
