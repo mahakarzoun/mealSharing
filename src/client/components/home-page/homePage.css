@@ -1,5 +1,8 @@
 .homePage {
     margin: 1em 0;
     padding: 0 1em;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 
 }

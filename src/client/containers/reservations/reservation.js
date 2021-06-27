@@ -19,7 +19,8 @@ function Reservations() {
     );
   }
 
-  function HandleSubmit(data) {}
+  const submitReservation = (request) => {};
+
   useEffect(() => {
     fetchMealById();
   }, []);
@@ -28,7 +29,7 @@ function Reservations() {
     <div>
       <img src={meal.image} />
       {reserveMode ? (
-        <ReservationForm />
+        <ReservationForm createReservation={submitReservation} />
       ) : (
         <div>
           <h2>{meal.title}</h2>
@@ -36,7 +37,7 @@ function Reservations() {
           <p>location:{meal.location}</p>
           <p>when: {meal.when}</p>
           <p>max_reservations: {meal.max_reservations}</p>
-          <p>price :{meal.price}</p>
+          <p>price :{`${meal.price} kr`} </p>
           <button onClick={setMode.bind(true)}>reserve</button>
         </div>
       )}
