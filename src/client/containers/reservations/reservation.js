@@ -7,20 +7,39 @@ function Reservations() {
   const SERVER_PORT = 5000;
   const ENDPOINT = {
     meals: "api/meals",
+    reservation: "api/reservation",
   };
   const [meal, setMeal] = useState({});
   const [reserveMode, setMode] = useState(false);
 
-  function fetchMealById() {
+  function getMealId() {
     const path = document.location.href.split("/");
-    const mealId = path[path.length - 1];
-    fetch(`${SERVER_URL}:${SERVER_PORT}/${ENDPOINT.meals}/${mealId}`).then(
+    return path[path.length - 1];
+  }
+  function fetchMealById() {
+    fetch(`${SERVER_URL}:${SERVER_PORT}/${ENDPOINT.meals}/${getMealId()}`).then(
       (res) => res.json().then((data) => setMeal(data))
     );
   }
 
-  const submitReservation = (request) => {};
-
+  const submitReservation = (request) => {
+    debugger;
+    request["created_date"] = new Date();
+    request["meal_id"] = getMealId();
+    fetch(`${SERVER_URL}:${SERVER_PORT}/${ENDPOINT.reservation}`, {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(request),
+    }).then((res) =>
+      res.json().then((data) => {
+        setMode(false);
+        fetchMealById();
+      })
+    );
+  };
   useEffect(() => {
     fetchMealById();
   }, []);

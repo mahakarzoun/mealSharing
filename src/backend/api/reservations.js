@@ -48,22 +48,44 @@ router.get("/:id", async (request, response) => {
   }
 });
 
-router.post("/:id", async (request, response) => {
+router.post("/", async (request, response) => {
   try {
-    const addReservationById = await knex("reservations").insert(request.body);
-    response.send(addReservationById);
+    console.log("reservation request =  " + request.body);
+
+    const meal_id = request.body.meal_id;
+    const meal = await knex("meals").where({ id: meal_id });
+
+    // check if meal_id exsited .
+    if (meal.length != 1) {
+      console.log("meal id " + meal_id + "not found ");
+      return response.sendStatus(400).send("meal id " + meal_id + "not found ");
+    }
+
+    // check if the available meals more or equal than the requested meals .
+    if (meal.max_reservations < request.body.number_of_guests) {
+      console.log(
+        "remaining quantity is not suffecient " + meal.max_reservations
+      );
+      return response
+        .sendStatus(412)
+        .send("remaining quantity is not suffecient ");
+    }
+
+    const addedReservation = await knex("reservations").insert(request.body);
+    await knex("meals").update({
+      max_reservations: meal.max_reservations - request.body.number_of_guests,
+    });
+
+    response.send(addedReservation);
   } catch (error) {
     throw error;
   }
 });
 
-router.put("/:id", async (request, response) => {
+router.post("/:id", async (request, response) => {
   try {
-    const id = parseInt(request.params.id);
-    const selectReservationById = await knex("reservations")
-      .where("id", id)
-      .update(request.body);
-    response.send(selectReservationById);
+    const addReservationById = await knex("reservations").insert(request.body);
+    response.send(addReservationById);
   } catch (error) {
     throw error;
   }

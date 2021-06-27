@@ -4,15 +4,6 @@ import "./reservationForm.css";
 function ReservationForm({ createReservation }) {
   const path = document.location.href.split("/");
   const mealId = path[path.length - 1];
-  const [reservation, setReservation] = useState({
-    id: "?", //increment in database
-    number_of_guests: "",
-    meal_id: mealId,
-    created_date: "", //defualt now
-    contact_phonenumber: "",
-    contact_name: "",
-    contact_email: "",
-  });
 
   const submit = (event) => {
     debugger;
