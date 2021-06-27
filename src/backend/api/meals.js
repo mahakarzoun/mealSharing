@@ -73,7 +73,8 @@ router.get("/:id", async (request, response) => {
     } else if (selectMealById.length === 0) {
       response.status(404).json({ error: "id not found" });
     } else {
-      response.send(selectMealById);
+      const result = selectMealById[0];
+      response.send(result);
     }
   } catch (error) {
     throw error;
