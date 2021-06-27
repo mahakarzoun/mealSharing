@@ -1,0 +1,11 @@
+
+.search{
+    text-align: right;
+}
+
+.mealsList{
+    display: flex;
+    flex-wrap: wrap;
+    margin-top:1em;
+    gap:10px;
+}
